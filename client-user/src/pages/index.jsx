@@ -26,12 +26,15 @@ export default function Home() {
       <main>
         <Navbar />
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
-        {console.log(data)}
-        {data
-          ? data.map((product, i) => {
-              return <Card product={product} key={product.id} i={i} />;
-            })
-          : null}
+        <div className="grid grid-cols-12">
+          <div className=" cols-start-2 col-span-10 grid grid-cols-12 gap-[10px]">
+            {data
+              ? data.map((product, i) => {
+                  return <Card product={product} key={product.id} i={i} />;
+                })
+              : null}
+          </div>
+        </div>
       </main>
     </>
   );

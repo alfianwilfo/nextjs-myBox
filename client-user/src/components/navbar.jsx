@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isHov, setIsHov] = useState(false);
   return (
     <>
-      <div className="w-screen flex flex-row text-[#EEEEEE] bg-[#222831] h-[100px]">
+      <div className=" flex flex-row text-[#EEEEEE] bg-[#222831] h-[100px]">
         <div className="px-[60px] grid content-center w-full">
           <div className="flex justify-between w-full">
             <div
