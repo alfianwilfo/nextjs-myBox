@@ -1,5 +1,4 @@
 "use strict";
-var bcrypt = require("bcryptjs");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -45,7 +44,3 @@ module.exports = {
     await queryInterface.dropTable("users");
   },
 };
-
-User.beforeCreate(async (user) => {
-  user.password = bcrypt.hashSync(user.password, 10);
-});
