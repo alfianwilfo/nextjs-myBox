@@ -1,4 +1,5 @@
 let { user } = require("../models/");
+var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 class User {
   static async register(req, res, next) {
@@ -17,7 +18,8 @@ class User {
       let findedUser = await user.findOne({ where: { email } });
 
       let comparePassword = bcrypt.compareSync(password, findedUser.password);
-      console.log(comparePassword);
+      var token = jwt.sign({ id: findedUser.id }, "shhhhh");
+      res.json({ access_token: token });
     } catch (error) {
       console.log(error);
     }
