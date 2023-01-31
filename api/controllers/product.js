@@ -5,20 +5,19 @@ class Product {
       let data = await product.findAll();
       res.json(data);
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
   static async findOne(req, res, next) {
     try {
       let { id } = req.params;
-      console.log(id);
       let data = await product.findByPk(id);
       if (!data) {
-        res.status(404).json({ message: "Data not found" });
+        throw { name: "validator", status: 404, message: "Data not found" };
       }
       res.json(data);
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 }
