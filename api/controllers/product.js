@@ -8,5 +8,13 @@ class Product {
       console.log(error);
     }
   }
+  static async findOne(req, res, next) {
+    try {
+      let { id } = req.params;
+      console.log(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 module.exports = Product;
