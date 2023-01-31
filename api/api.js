@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 3001;
 const route = require("./routes/");
 const cors = require("cors");
 const errorHandler = require("./helpers/errorHandler");
