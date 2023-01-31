@@ -8,7 +8,11 @@ class User {
       let createdUser = await user.create({ name, email, password, address });
       res.status(201).json({ message: "Success create account" });
     } catch (error) {
-      console.log(error);
+      if (error.name === "SequelizeUniqueConstraintError") {
+        res.status(400).json({ message: error.errors[0].message });
+      } else {
+        res.status(500).json({ message: "Internal server error" });
+      }
     }
   }
 
@@ -16,12 +20,19 @@ class User {
     try {
       let { email, password } = req.body;
       let findedUser = await user.findOne({ where: { email } });
+      if (!findedUser) {
+        res.status(401).json({ message: "Invalid email or password" });
+      }
 
       let comparePassword = bcrypt.compareSync(password, findedUser.password);
+      if (!comparePassword) {
+        res.status(401).json({ message: "Invalid email or password" });
+      }
+
       var token = jwt.sign({ id: findedUser.id }, "shhhhh");
       res.json({ access_token: token });
     } catch (error) {
-      console.log(error);
+      res.status(500).json({ message: "Internal server error" });
     }
   }
 }
