@@ -17,7 +17,6 @@ class User {
       let findedUser = await user.findOne({ where: { email } });
 
       let comparePassword = bcrypt.compareSync(password, findedUser.password);
-
       console.log(comparePassword);
     } catch (error) {
       console.log(error);
