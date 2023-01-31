@@ -1,4 +1,5 @@
 let { user } = require("../models/");
+var bcrypt = require("bcryptjs");
 class User {
   static async register(req, res, next) {
     try {
@@ -13,6 +14,11 @@ class User {
   static async login(req, res, next) {
     try {
       let { email, password } = req.body;
+      let findedUser = await user.findOne({ where: { email } });
+
+      let comparePassword = bcrypt.compareSync(password, findedUser.password);
+
+      console.log(comparePassword);
     } catch (error) {
       console.log(error);
     }
