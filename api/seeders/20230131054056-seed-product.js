@@ -1,4 +1,5 @@
 "use strict";
+let csvToJson = require("convert-csv-to-json");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -11,6 +12,15 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
+    let fileInputName = "ibox-product.csv";
+
+    let json = csvToJson.formatValueByType().getJsonFromCsv(fileInputName);
+    json.forEach((el) => {
+      delete el['"id'];
+      delete el['real_pdp_url"'];
+      el.createdAt = el.updatedAt = new Date();
+    });
+    await queryInterface.bulkInsert("products", json, {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -20,5 +30,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete("products", null, {});
   },
 };
