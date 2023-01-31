@@ -15,20 +15,38 @@ class User {
   static async login(req, res, next) {
     try {
       let { email, password } = req.body;
+      if (!email) {
+        throw { name: "validator", status: 400, message: "Email can't empty" };
+      }
+      if (!password) {
+        throw {
+          name: "validator",
+          status: 400,
+          message: "Password can't empty",
+        };
+      }
       let findedUser = await user.findOne({ where: { email } });
       if (!findedUser) {
-        res.status(401).json({ message: "Invalid email or password" });
+        throw {
+          name: "validator",
+          status: 401,
+          message: "Invalid email or password",
+        };
       }
 
       let comparePassword = bcrypt.compareSync(password, findedUser.password);
       if (!comparePassword) {
-        res.status(401).json({ message: "Invalid email or password" });
+        throw {
+          name: "validator",
+          status: 401,
+          message: "Invalid email or password",
+        };
       }
 
       var token = jwt.sign({ id: findedUser.id }, "shhhhh");
       res.json({ access_token: token });
     } catch (error) {
-      res.status(500).json({ message: "Internal server error" });
+      next(error);
     }
   }
 }

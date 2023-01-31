@@ -1,5 +1,4 @@
 let errorHandler = (error, req, res, next) => {
-  console.log(error.name);
   let status = 500;
   let message = "Internal server error";
 
@@ -9,6 +8,9 @@ let errorHandler = (error, req, res, next) => {
       status = 400;
       message = error.errors[0].message;
       break;
+    case "validator":
+      status = error.status;
+      message = error.message;
   }
   res.status(status).json({ message });
 };
