@@ -12,6 +12,11 @@ class Product {
     try {
       let { id } = req.params;
       console.log(id);
+      let data = await product.findByPk(id);
+      if (!data) {
+        res.status(404).json({ message: "Data not found" });
+      }
+      res.json(data);
     } catch (error) {
       console.log(error);
     }
