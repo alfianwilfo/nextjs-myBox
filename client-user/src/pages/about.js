@@ -1,7 +1,6 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
 
-export default function Home() {
+export default function About() {
   return (
     <>
       <Head>
@@ -11,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <div>from about</div>
       </main>
     </>
   );
