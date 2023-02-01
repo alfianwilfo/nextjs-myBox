@@ -7,7 +7,7 @@ export default function Login() {
   let showPw = (e) => {
     e.preventDefault();
     let temp = document.getElementById("password");
-    let but = document.getElementById("a");
+    let but = document.getElementById("showhide");
     if (temp.type === "password") {
       temp.type = "text";
       but.innerText = "Hide password";
@@ -56,7 +56,7 @@ export default function Login() {
                     </div>
                     <div>
                       <button
-                        id="a"
+                        id="showhide"
                         onClick={showPw}
                         className="text-[13px] italic font-semibold"
                       >
