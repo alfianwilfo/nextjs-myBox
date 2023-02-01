@@ -37,7 +37,23 @@ export default function Register() {
     e.preventDefault();
     register(input).then((res) => {
       if (res.data) {
-        toast.success(res.data.message, {
+        setInput({ name: "", email: "", password: "" });
+        toast.success(
+          res.data.message + ", please login first to use this application",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }
+        );
+      }
+      if (res.error) {
+        toast.error(res.error.data.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -45,7 +61,7 @@ export default function Register() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: "dark",
         });
       }
     });
