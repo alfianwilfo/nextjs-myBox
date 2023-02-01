@@ -18,41 +18,41 @@ export default function Detail() {
           <div className="text-[100px]">Loading ...</div>
         </div>
       ) : (
-        <div className="w-screen h-screen">
-          <div className="grid grid-cols-12 grid-rows-6">
-            <div className="col-span-12 row-span-1">
-              <Navbar />
+        <div className="grid grid-cols-12 grid-rows-6">
+          <div className="col-span-12 row-span-1">
+            <Navbar />
+          </div>
+          <div className="col-start-2 col-end-12 outline outline-1 row-start-2 row-end-6 grid grid-cols-12">
+            <div className="bg-containt col-start-2 col-end-7">
+              <Image src={data.imageUrl} width={500} height={500} />
             </div>
-            <div className="col-start-2 col-end-12 outline outline-1 row-start-2 row-end-6 grid grid-cols-12">
-              <div className="bg-containt col-start-2 col-end-7">
-                <Image src={data.imageUrl} width={500} height={500} />
-              </div>
-              <div className="col-start-7 col-end-12 p-[30px] flex flex-col gap-y-[10px]">
+            <div className="col-start-7 col-end-12 p-[30px] flex flex-col gap-y-[50px]">
+              <div>
                 <div className="px-[100px] text-center flex justify-center">
-                  <div className="text-black w-[100px] rounded-[2px] hover:text-white hover:bg-[#00ADB5] outline outline-1 outline-[#00ADB5]">
+                  <div className="transition-colors duration-700 ease-in-out text-black font-bold w-[100px] rounded-[2px] hover:text-white hover:bg-[#00ADB5] outline outline-1 outline-[#00ADB5]">
                     {data.brand}
                   </div>
                 </div>
-                <div className="text-[25px] font-semibold text-center">
-                  {data.name}
-                </div>
-                <div className="text-[23px] font-semibold flex flex-row justify-end text-right">
-                  <div>Harga:</div>
-                  <div className="text-[#00ADB5]">{rupiah(data.price)}</div>
-                </div>
-                <div className="flex justify-between">
-                  <div>
-                    <button className="outline outline-1 rounded ">
-                      <div className="px-[20px] py-[5px]">
-                        Masukkan keranjang
-                      </div>
-                    </button>
+                <div>
+                  <div className="text-[25px] font-semibold text-right">
+                    {data.name}
                   </div>
-                  <div>
-                    <button className="text-white rounded bg-[#00ADB5] hover:brightness-[0.90]">
-                      <div className="px-[20px] py-[5px]">Beli sekarang</div>
-                    </button>
+                  <div className="text-[23px] font-semibold flex flex-row justify-end text-right">
+                    <div>Harga:</div>
+                    <div className="text-[#00ADB5]">{rupiah(data.price)}</div>
                   </div>
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <div>
+                  <button className="transition-colors duration-700 ease-in-out outline outline-1 outline-[#222831] hover:bg-[#222831] hover:text-white rounded w-[190px]">
+                    <div className="py-[5px]">Masukkan keranjang</div>
+                  </button>
+                </div>
+                <div>
+                  <button className="transition-colors duration-700 ease-in-out text-white rounded bg-[#00ADB5] hover:bg-[#029ca3] w-[190px]">
+                    <div className="py-[5px]">Beli sekarang</div>
+                  </button>
                 </div>
               </div>
             </div>
