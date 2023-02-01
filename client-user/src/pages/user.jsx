@@ -50,6 +50,43 @@ export default function User() {
               </div>
               <div>
                 <div className="font-bold">Change password</div>
+                <div>
+                  <form className="flex flex-col gap-y-[10px]">
+                    <div>
+                      <input
+                        className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                        type="text"
+                        placeholder="New password"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                        type="text"
+                        placeholder="Repeat new password"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                        type="text"
+                        placeholder="Old password"
+                      />
+                    </div>
+                    <div className="grid grid-cols-12">
+                      <div className="col-start-1 col-end-9">
+                        <button className="w-full transition-colors duration-700 ease-in-out text-white rounded bg-[#00ADB5] hover:bg-[#029ca3] py-[4px]">
+                          Save
+                        </button>
+                      </div>
+                      <div className="col-start-10 col-span-5">
+                        <button className="py-[4px] w-full transition-colors duration-700 ease-in-out outline outline-1 outline-[#222831] hover:bg-[#222831] hover:text-white rounded">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
