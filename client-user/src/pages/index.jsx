@@ -1,20 +1,23 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "@/features/fetcherSlice";
+import { useGetProductsQuery } from "@/features/apiSlice";
 import Head from "next/head";
 import Navbar from "@/components/navbar";
 import Card from "@/components/card";
 
 export default function Home() {
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:3001/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
+  const { data, error } = useGetProductsQuery();
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  //   // fetch("http://localhost:3001/products")
+  //   //   .then((res) => res.json())
+  //   //   .then((data) => {
+  //   //     setData(data);
+  //   //   });
+  // }, []);
   return (
     <>
       <Head>
