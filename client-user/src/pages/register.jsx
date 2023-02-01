@@ -30,6 +30,7 @@ export default function Register() {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    console.log(input);
   };
 
   return (
