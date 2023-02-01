@@ -33,7 +33,8 @@ export default function Register() {
   const handlerSubmit = (e) => {
     e.preventDefault();
     register(input).then((res) => {
-      console.log(res, "???");
+      if (res.data) {
+      }
     });
   };
 
