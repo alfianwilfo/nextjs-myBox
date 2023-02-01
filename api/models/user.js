@@ -47,11 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: { msg: "Address can't empty" },
-          notEmpty: { msg: "Address can't empty" },
-        },
       },
     },
     {
