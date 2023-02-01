@@ -25,7 +25,7 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
-        <h1 className="text-3xl my-[40px] text-center font-bold underline">
+        <h1 className="text-3xl my-[40px] text-center font-bold underline underline-offset-8 decoration-[#00ADB5]">
           Our Products
         </h1>
         <div className="grid grid-cols-12">
