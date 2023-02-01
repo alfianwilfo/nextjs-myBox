@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Navbar from "@/components/navbar";
 import { useGetProductByIdQuery } from "@/features/apiSlice";
+import Loading from "@/components/loading";
 export default function Detail() {
   let router = useRouter();
   const { data, isLoading } = useGetProductByIdQuery(router.query.id);
@@ -11,13 +12,21 @@ export default function Detail() {
       currency: "IDR",
     }).format(number);
   };
+  const App = () => <Lottie animationData={groovyWalkAnimation} loop={true} />;
   return (
     <>
       {isLoading ? (
-        <div className="w-screen h-screen flex justify-center items-center">
-          <div className="text-[100px]">Loading ...</div>
+        <div className="w-screen h-screen flex justify-center">
+          <div className="grid content-center">
+            <div>
+              <Loading />
+            </div>
+          </div>
         </div>
       ) : (
+        // <div className="w-screen h-screen flex justify-center items-center">
+        //   <div className="text-[100px]">Loading ...</div>
+        // </div>
         <div className="grid grid-cols-12 grid-rows-6">
           <div className="col-span-12 row-span-1">
             <Navbar />
@@ -30,7 +39,7 @@ export default function Detail() {
               <div>
                 <div className="px-[100px] text-center flex justify-center">
                   <div className="transition-colors duration-700 ease-in-out text-black font-bold w-[100px] rounded-[2px] hover:text-white hover:bg-[#00ADB5] outline outline-1 outline-[#00ADB5]">
-                    {data.brand}
+                    <div className="p-[1px]">{data.brand}</div>
                   </div>
                 </div>
                 <div>
