@@ -6,15 +6,19 @@ import { useLoginMutation } from "@/features/apiUser";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 export default function Login() {
   let [login] = useLoginMutation();
+  const router = useRouter();
   const [input, setInput] = useState({ email: "", password: "" });
   let log = (e) => {
     e.preventDefault();
-    console.log(input);
     login(input).then((res) => {
-      console.log(res);
+      if (res.data) {
+        localStorage.access_token = res.data.access_token;
+        router.push("/");
+      }
       if (res.error) {
         toast.error(res.error.data.message, {
           position: "top-right",
