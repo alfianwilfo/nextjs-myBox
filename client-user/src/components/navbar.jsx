@@ -24,14 +24,18 @@ export default function Navbar() {
             <div className="grid content-center">
               <div className="flex flex-row gap-[10px]">
                 <div>
-                  <button className="outline outline-1 outline-[#00ADB5] rounded-[1px] w-[90px] h-[40px] hover:bg-[#00ADB5] text-[#EEEEEE] transition-colors duration-[1200ms]">
-                    Login
-                  </button>
+                  <Link href="/login">
+                    <button className="outline outline-1 outline-[#00ADB5] rounded-[1px] w-[90px] h-[40px] hover:bg-[#00ADB5] text-[#EEEEEE] transition-colors duration-[1200ms]">
+                      Login
+                    </button>
+                  </Link>
                 </div>
                 <div>
-                  <button className="outline outline-1 outline-[#00ADB5] rounded-[1px] w-[90px] h-[40px] hover:bg-[#00ADB5] hover:text-[#222831] text-[#EEEEEE] transition-colors duration-[1200ms]">
-                    Register
-                  </button>
+                  <Link href="/register">
+                    <button className="outline outline-1 outline-[#00ADB5] rounded-[1px] w-[90px] h-[40px] hover:bg-[#00ADB5] hover:text-[#222831] text-[#EEEEEE] transition-colors duration-[1200ms]">
+                      Register
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -2,8 +2,10 @@ import Image from "next/image";
 import logo from "@/public/log.png";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 
-export default function Login() {
+export default function Register() {
+  let [input, setInput] = useState({ name: "", email: "", password: "" });
   let showPw = (e) => {
     e.preventDefault();
     let temp = document.getElementById("password");
@@ -16,6 +18,21 @@ export default function Login() {
       but.innerText = "Show password";
     }
   };
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    setInput({
+      ...input,
+      [name]: value,
+    });
+  };
+
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    console.log(input);
+  };
+
   return (
     <>
       <Head>
@@ -35,23 +52,44 @@ export default function Login() {
           </div>
           <div className="w-1/2 grid grid-cols-12 h-full grid grid-rows-6">
             <div className="col-start-2 col-end-12 h-full row-span-6 grid grid-rows-6 p-[10px]">
-              <div className="text-[17px] font-semibold row-span-1">Log in</div>
+              <div className="text-[17px] font-semibold row-span-1">
+                Register
+              </div>
               <div className="row-start-2">
-                <form className="w-full flex flex-col gap-y-[20px]">
+                <form
+                  onSubmit={handlerSubmit}
+                  className="w-full flex flex-col gap-y-[20px]"
+                >
                   <div>
                     <input
+                      name="name"
+                      type="text"
+                      className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                      placeholder="Name"
+                      onChange={handleChange}
+                      value={input.name}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      name="email"
                       type="email"
                       className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
                       placeholder="Email"
+                      onChange={handleChange}
+                      value={input.email}
                     />
                   </div>
                   <div>
                     <div>
                       <input
+                        name="password"
                         type="password"
                         className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
                         placeholder="Password"
                         id="password"
+                        onChange={handleChange}
+                        value={input.password}
                       />
                     </div>
                     <div>
@@ -71,10 +109,10 @@ export default function Login() {
                       </button>
                     </div>
                     <div className="text-[14px]">
-                      Baru di next store?
-                      <Link href="/register">
+                      Sudah punya account?
+                      <Link href="/login">
                         <button className="ml-[1px] transition-colors duration-[700ms] hover:text-[#00ADB5]">
-                          Daftar disini
+                          Login disini
                         </button>
                       </Link>
                     </div>
