@@ -2,12 +2,14 @@ import Image from "next/image";
 import logo from "@/public/log.png";
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRegisterMutation } from "@/features/apiUser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 export default function Register() {
+  const router = useRouter();
   const [register] = useRegisterMutation();
   let [input, setInput] = useState({ name: "", email: "", password: "" });
   let showPw = (e) => {
@@ -32,6 +34,10 @@ export default function Register() {
     });
   };
   const notify = () => toast("Wow so easy!");
+
+  useEffect(() => {
+    localStorage.access_token ? router.push("/") : null;
+  }, []);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
