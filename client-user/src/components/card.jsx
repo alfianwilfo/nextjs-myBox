@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/router";
 export default function Card({ product, i }) {
+  let router = useRouter();
   const [isShown, setIsShown] = useState(false);
+
+  let toMore = () => {
+    router.push("/login");
+  };
+
   return (
     <div
       className="col-span-3 backdrop-blur-sm "
@@ -14,7 +21,10 @@ export default function Card({ product, i }) {
             <div className="font-semibold text-center">{product.name}</div>
             <div className="flex justify-center">
               <div>
-                <button className="rounded outline outline-1 w-[50px] text-[20px]">
+                <button
+                  onClick={toMore}
+                  className="rounded outline outline-1 w-[50px] text-[20px]"
+                >
                   ...
                 </button>
               </div>
