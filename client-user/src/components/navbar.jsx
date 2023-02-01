@@ -3,9 +3,14 @@ import Image from "next/image";
 import logo from "@/public/logonav.png";
 import logom from "@/public/log.png";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter();
   const [isHov, setIsHov] = useState(false);
+  let goHome = () => {
+    router.push("/");
+  };
   return (
     <>
       <div className=" flex flex-row text-[#EEEEEE] bg-[#222831] h-[100px]">
@@ -16,7 +21,11 @@ export default function Navbar() {
               onMouseLeave={() => setIsHov(false)}
             >
               {isHov ? (
-                <Image src={logom} className=" w-[80px] h-[80px]" />
+                <div onClick={goHome}>
+                  <button>
+                    <Image src={logom} className=" w-[80px] h-[80px]" />
+                  </button>
+                </div>
               ) : (
                 <Image src={logo} className=" w-[80px] h-[80px]" />
               )}
