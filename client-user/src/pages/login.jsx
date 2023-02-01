@@ -3,18 +3,28 @@ import logo from "@/public/log.png";
 import Head from "next/head";
 import Link from "next/link";
 import { useLoginMutation } from "@/features/apiUser";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 export default function Login() {
   let [login] = useLoginMutation();
+  const router = useRouter();
+
   const [input, setInput] = useState({ email: "", password: "" });
+
+  useEffect(() => {
+    localStorage.access_token ? router.push("/") : null;
+  }, []);
+
   let log = (e) => {
     e.preventDefault();
-    console.log(input);
     login(input).then((res) => {
-      console.log(res);
+      if (res.data) {
+        localStorage.access_token = res.data.access_token;
+        router.push("/");
+      }
       if (res.error) {
         toast.error(res.error.data.message, {
           position: "top-right",
