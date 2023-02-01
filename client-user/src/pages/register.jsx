@@ -30,7 +30,6 @@ export default function Register() {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
   };
 
   return (
@@ -104,8 +103,8 @@ export default function Register() {
                   </div>
                   <div className="flex flex-col gap-y-[5px]">
                     <div>
-                      <button className="transition-colors duration-[1000ms] outline outline-1 outline-[#393E46] hover:text-white hover:bg-[#00ADB5]  p-[10px] w-full rounded-[1px]">
-                        Login
+                      <button className="transition-colors duration-700 outline outline-1 outline-[#393E46] hover:text-white hover:bg-[#00ADB5]  p-[10px] w-full rounded-[1px]">
+                        Register
                       </button>
                     </div>
                     <div className="text-[14px]">
