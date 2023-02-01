@@ -6,7 +6,7 @@ export default function Card({ product, i }) {
   const [isShown, setIsShown] = useState(false);
 
   let toMore = () => {
-    router.push("/login");
+    router.push(`/detail/${product.id}`);
   };
 
   return (
