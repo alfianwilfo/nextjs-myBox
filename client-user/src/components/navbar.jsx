@@ -4,7 +4,7 @@ import logo from "@/public/logonav.png";
 import logom from "@/public/log.png";
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/router";
-
+import Account from "./account";
 export default function Navbar() {
   const router = useRouter();
   const [isHov, setIsHov] = useState(false);
@@ -35,26 +35,26 @@ export default function Navbar() {
               )}
             </div>
             <div className="grid content-center">
-              <div className="flex flex-row gap-[10px]">
-                <div>
-                  {!isLogin ? (
+              {!isLogin ? (
+                <div className="flex flex-row gap-[10px]">
+                  <div>
                     <Link href="/login">
                       <button className="outline outline-1 outline-[#00ADB5] rounded-[1px] w-[90px] h-[40px] hover:bg-[#00ADB5] text-[#EEEEEE] transition-colors duration-[1200ms]">
                         Login
                       </button>
                     </Link>
-                  ) : null}
-                </div>
-                <div>
-                  {!isLogin ? (
+                  </div>
+                  <div>
                     <Link href="/register">
                       <button className="outline outline-1 outline-[#00ADB5] rounded-[1px] w-[90px] h-[40px] hover:bg-[#00ADB5] hover:text-[#222831] text-[#EEEEEE] transition-colors duration-[1200ms]">
                         Register
                       </button>
                     </Link>
-                  ) : null}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <Account />
+              )}
             </div>
           </div>
         </div>
