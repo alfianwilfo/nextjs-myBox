@@ -3,8 +3,10 @@ import logo from "@/public/log.png";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
+import { useRegisterMutation } from "@/features/apiUser";
 
 export default function Register() {
+  const [register] = useRegisterMutation();
   let [input, setInput] = useState({ name: "", email: "", password: "" });
   let showPw = (e) => {
     e.preventDefault();
@@ -30,7 +32,9 @@ export default function Register() {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
+    register(input).then((res) => {
+      console.log(res, "???");
+    });
   };
 
   return (

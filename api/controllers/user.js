@@ -5,8 +5,10 @@ class User {
   static async register(req, res, next) {
     try {
       let { name, email, password, address } = req.body;
-      let createdUser = await user.create({ name, email, password, address });
-      res.status(201).json({ message: "Success create account" });
+      console.log(req.body);
+      res.json({ msg: "yey" });
+      // let createdUser = await user.create({ name, email, password, address });
+      // res.status(201).json({ message: "Success create account" });
     } catch (error) {
       next(error);
     }
