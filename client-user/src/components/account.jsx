@@ -13,6 +13,9 @@ export default function Account() {
     localStorage.clear();
     router.reload();
   };
+  let toUser = () => {
+    router.push("/user");
+  };
   return (
     <div>
       <Menu as="div" className="relative inline-block text-left">
@@ -35,6 +38,7 @@ export default function Account() {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={toUser}
                     className={`${
                       active ? "bg-[#00ADB5] text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
