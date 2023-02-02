@@ -14,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/log.png" />
       </Head>
       <Navbar />
-      <div className="w-screen grid grid-cols-12">
+      <div className="grid grid-cols-12">
         <div className="col-start-2 col-end-12 flex flex-col gap-y-[40px]">
           <div className="text-[50px] font-semibold text-center underline underline-offset-4 decoration-[#00ADB5]">
             Dashboard
