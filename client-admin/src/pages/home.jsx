@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Navbar from "@/components/navbar";
+import { useState } from "react";
 export default function Home() {
+  useState(() => {}, []);
   return (
     <>
       <Head>
@@ -11,13 +13,14 @@ export default function Home() {
       </Head>
       <Navbar />
       <div className="w-screen grid grid-cols-12">
-        <div className="col-start-2 col-end-12">
-          <div className="text-[50px] font-semibold text-center">Dashboard</div>
+        <div className="col-start-2 col-end-12 flex flex-col gap-y-[40px]">
+          <div className="text-[50px] font-semibold text-center underline underline-offset-4 decoration-[#00ADB5]">
+            Dashboard
+          </div>
           <div>
             <table className="w-full">
-              <thead>
-                <tr>
-                  <th className="border border-[2px] border-slate-600">No</th>
+              <thead className="h-[30px]">
+                <tr className="rounded-t border-b-2 border-[#393E46] text-[18px]">
                   <th>Name</th>
                   <th>Image</th>
                   <th>Brand</th>
@@ -26,7 +29,6 @@ export default function Home() {
               </thead>
               <tbody>
                 <tr>
-                  <td>asa</td>
                   <td>asa</td>
                   <td>asa</td>
                   <td>asa</td>
