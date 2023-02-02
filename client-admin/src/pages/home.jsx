@@ -3,6 +3,9 @@ import Navbar from "@/components/navbar";
 import { useGetProductsQuery } from "@/features/apiProducts";
 import Trow from "@/components/trow";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Home() {
   const { data, error, isLoading } = useGetProductsQuery();
   let router = useRouter();
@@ -19,6 +22,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/log.png" />
       </Head>
+      <ToastContainer />
       <Navbar />
       <div className="grid grid-cols-12">
         <div className="col-start-2 col-end-12 flex flex-col gap-y-[40px]">
