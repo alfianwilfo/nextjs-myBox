@@ -1,6 +1,12 @@
 import logos from "@/public/logos.png";
 import Image from "next/image";
+import { useRouter } from "next/router";
 export default function Navbar() {
+  let router = useRouter();
+  let toLogout = () => {
+    localStorage.clear();
+    router.push("/");
+  };
   return (
     <>
       <div className="h-[110px] outline outline-1 outline-[#00ADB5] grid content-center ">
@@ -10,7 +16,10 @@ export default function Navbar() {
           </div>
           <div className="grid content-center">
             <div>
-              <button className="transition-color duration-700 text-[#222831] outline outline-1 outline-[#222831] hover:bg-[#222831] hover:text-[white] rounded px-[10px] py-[5px]">
+              <button
+                onClick={toLogout}
+                className="transition-color duration-700 text-[#222831] outline outline-1 outline-[#222831] hover:bg-[#222831] hover:text-[white] rounded px-[10px] py-[5px]"
+              >
                 Logout
               </button>
             </div>

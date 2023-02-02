@@ -36,6 +36,18 @@ export default function Create() {
           theme: "colored",
         });
       }
+      if (res.error) {
+        toast.warn(res.error.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
     });
   };
   return (

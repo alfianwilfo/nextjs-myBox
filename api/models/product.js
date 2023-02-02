@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: { msg: "Image URL product can't empty" },
           notEmpty: { msg: "Image URL product can't empty" },
+          isUrl: { msg: "Invalid URL" },
         },
       },
       info: { type: DataTypes.STRING },

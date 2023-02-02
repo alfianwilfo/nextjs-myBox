@@ -5,10 +5,15 @@ import Trow from "@/components/trow";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 export default function Home() {
   const { data, error, isLoading } = useGetProductsQuery();
   let router = useRouter();
+
+  useEffect(() => {
+    localStorage.access_token ? null : router.push("/");
+  }, []);
 
   let toCreate = () => {
     router.push("/product/create");
