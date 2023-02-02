@@ -2,7 +2,9 @@ let { product } = require("../models/");
 class Product {
   static async getAll(req, res, next) {
     try {
-      let data = await product.findAll();
+      let data = await product.findAll({
+        order: [["id", "DESC"]],
+      });
       res.json(data);
     } catch (error) {
       next(error);
@@ -41,7 +43,9 @@ class Product {
   static async delete(req, res, next) {
     try {
       let id = +req.params.id;
-      let findProduct = await product.destroy({ where: { id } });
+      let findProduct = await product.destroy({
+        where: { id },
+      });
       if (!findProduct) {
         res.status(404).json({ message: "Product not found" });
       }
