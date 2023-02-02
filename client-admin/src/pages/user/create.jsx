@@ -4,10 +4,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { useCreateUserMutation } from "@/features/apiUser";
 import { useRouter } from "next/router";
+import Link from "next/link";
 export default function Create() {
   let [createUser] = useCreateUserMutation();
   let router = useRouter();
   let [input, setInput] = useState({ name: "", email: "", password: "" });
+
+  let cancels = () => {
+    router.push("/user");
+  };
 
   let handlerSubmit = (e) => {
     e.preventDefault();
@@ -78,61 +83,72 @@ export default function Create() {
               <div className="text-[25px] text-center font-semibold row-span-1">
                 Create new User
               </div>
-              <div className="row-start-2">
-                <form
-                  onSubmit={handlerSubmit}
-                  className="w-full flex flex-col gap-y-[20px]"
-                >
-                  <div>
-                    <input
-                      name="name"
-                      type="text"
-                      className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
-                      placeholder="Name"
-                      onChange={handleChange}
-                      value={input.name}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      name="email"
-                      type="email"
-                      className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
-                      placeholder="Email"
-                      onChange={handleChange}
-                      value={input.email}
-                    />
-                  </div>
-                  <div>
+              <div className="row-start-2 ">
+                <div>
+                  <form
+                    onSubmit={handlerSubmit}
+                    className="w-full flex flex-col gap-y-[20px]"
+                  >
                     <div>
                       <input
-                        name="password"
-                        type="password"
+                        name="name"
+                        type="text"
                         className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
-                        placeholder="Password"
-                        id="password"
+                        placeholder="Name"
                         onChange={handleChange}
-                        value={input.password}
+                        value={input.name}
                       />
                     </div>
                     <div>
-                      <button
-                        id="a"
-                        onClick={showPw}
-                        className="text-[13px] italic font-semibold"
-                      >
-                        Show password
-                      </button>
+                      <input
+                        name="email"
+                        type="email"
+                        className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                        placeholder="Email"
+                        onChange={handleChange}
+                        value={input.email}
+                      />
                     </div>
-                  </div>
-                  <div className="flex flex-col gap-y-[5px]">
                     <div>
-                      <button className="transition-colors duration-700 outline outline-1 outline-[#393E46] hover:text-white hover:bg-[#00ADB5]  p-[10px] w-full rounded-[1px]">
+                      <div>
+                        <input
+                          name="password"
+                          type="password"
+                          className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                          placeholder="Password"
+                          id="password"
+                          onChange={handleChange}
+                          value={input.password}
+                        />
+                      </div>
+                      <div>
+                        <button
+                          id="a"
+                          onClick={showPw}
+                          className="text-[13px] italic font-semibold"
+                        >
+                          Show password
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        type="submit"
+                        className=" text-white bg-[#00ADB5]  p-[10px] w-full rounded-[1px]"
+                      >
                         Create user
                       </button>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
+                <div className="mt-[10px]">
+                  <button
+                    onClick={cancels}
+                    className="transition-colors duration-700 outline outline-1 outline-[#393E46] hover:text-white hover:bg-[#393E46]  p-[10px] w-full rounded-[1px]"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             </div>
           </div>
