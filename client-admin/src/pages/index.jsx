@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { useState } from "react";
+import { useLoginMutation } from "@/features/apiUser";
 export default function Home() {
   let [input, setInput] = useState({ username: "", password: "" });
+  let [login] = useLoginMutation();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -15,6 +17,9 @@ export default function Home() {
   const submitLogin = (e) => {
     e.preventDefault();
     console.log(input);
+    login(input).then((res) => {
+      console.log(res);
+    });
   };
   return (
     <>
