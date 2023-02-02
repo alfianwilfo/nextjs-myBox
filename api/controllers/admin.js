@@ -3,6 +3,29 @@ var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
 class Admin {
+  static async createUser(req, res, next) {
+    try {
+      let { name, email, password } = req.body;
+      console.log(name, email, password, "??");
+      let createdUser = await user.create({ name, email, password });
+      res.status(201).json({ message: "Success create new user" });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async changePassword(req, res, next) {
+    try {
+      let { password } = req.body;
+      let id = +req.params.id;
+      let changePassword = await user.update(
+        { password },
+        { where: { id }, individualHooks: true }
+      );
+      res.json({ message: "Success change password" });
+    } catch (error) {
+      next(error);
+    }
+  }
   static async delete(req, res, next) {
     try {
       let id = +req.params.id;
