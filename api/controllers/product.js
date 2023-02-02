@@ -23,8 +23,16 @@ class Product {
 
   static async create(req, res, next) {
     try {
-      let { name, price, imageUrl, brand } = req.body;
-      console.log(name, price, imageUrl, brand);
+      let { name, imageUrl, brand } = req.body;
+      let price = +req.body.price;
+      let createdProduct = await product.create({
+        name,
+        imageUrl,
+        brand,
+        price,
+      });
+      console.log(createdProduct);
+      res.status(201).json({ message: "Success create product" });
     } catch (error) {
       next(error);
     }

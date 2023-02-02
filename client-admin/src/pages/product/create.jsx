@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useCreateProductMutation } from "@/features/apiProducts";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Create() {
   const [createProduct] = useCreateProductMutation();
   const [input, setInput] = useState({
@@ -21,10 +24,23 @@ export default function Create() {
     e.preventDefault();
     createProduct(input).then((res) => {
       console.log(res);
+      if (res.data) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
     });
   };
   return (
     <>
+      <ToastContainer />
       <div className="h-screen grid grid-cols-12 grid-rows-6">
         <div className="col-start-5 col-end-9 row-start-2 row-span-4 outline outline-1 grid grid-cols-12">
           <div className="col-start-2 col-end-12 flex flex-col gap-y-[50px]">

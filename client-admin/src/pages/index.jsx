@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoginMutation } from "@/features/apiUser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +9,10 @@ export default function Home() {
   let [input, setInput] = useState({ username: "", password: "" });
   let [login] = useLoginMutation();
   let router = useRouter();
+
+  useEffect(() => {
+    localStorage.access_token ? router.push("/home") : null;
+  }, []);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -22,7 +26,6 @@ export default function Home() {
   const submitLogin = (e) => {
     e.preventDefault();
     login(input).then((res) => {
-      console.log(res);
       if (res.error) {
         toast.warn(res.error.data.message, {
           position: "top-right",
@@ -46,6 +49,7 @@ export default function Home() {
           progress: undefined,
           theme: "dark",
         });
+        localStorage.access_token = res.data.access_token;
         router.push("/home");
       }
     });
