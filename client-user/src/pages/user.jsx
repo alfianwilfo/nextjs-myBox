@@ -7,9 +7,10 @@ import { useEffect, useState } from "react";
 import { useChangeMutation } from "@/features/apiUser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useChangePasswordMutation } from "@/features/apiUser";
 export default function User() {
   let [settings] = useSettingsMutation();
+  let [changePassword] = useChangePasswordMutation();
   let [data, setData] = useState({ name: "", address: "" });
   let [pw, setPw] = useState({ newPw: "", oldPw: "" });
   let [change] = useChangeMutation();
@@ -85,6 +86,7 @@ export default function User() {
       [name]: value,
     });
   };
+
   let showOldPw = (e) => {
     e.preventDefault();
     let temp = document.getElementById("oldPw");
@@ -98,7 +100,37 @@ export default function User() {
     }
   };
 
-  const changePassword = () => {};
+  let showNewPw = (e) => {
+    e.preventDefault();
+    let temp = document.getElementById("newPw");
+    let but = document.getElementById("newShow");
+    if (temp.type === "password") {
+      temp.type = "text";
+      but.innerText = "Hide password";
+    } else {
+      temp.type = "password";
+      but.innerText = "Show password";
+    }
+  };
+
+  const submitChangePassword = (e) => {
+    e.preventDefault();
+    changePassword(pw).then((res) => {
+      console.log(res);
+      if (res.error) {
+        toast.warn(res.error.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    });
+  };
   return (
     <>
       <Head>
@@ -169,16 +201,31 @@ export default function User() {
               <div className="flex flex-col gap-y-[20px]">
                 <div className="font-bold">Change password</div>
                 <div>
-                  <form className="flex flex-col gap-y-[10px]">
+                  <form
+                    onSubmit={submitChangePassword}
+                    className="flex flex-col gap-y-[10px]"
+                  >
                     <div>
-                      <input
-                        className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
-                        type="text"
-                        placeholder="New password"
-                        onChange={handleChangePassword}
-                        value={pw.newPw}
-                        name="newPw"
-                      />
+                      <div>
+                        <input
+                          className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                          type="password"
+                          placeholder="New password"
+                          onChange={handleChangePassword}
+                          value={pw.newPw}
+                          name="newPw"
+                          id="newPw"
+                        />
+                      </div>
+                      <div>
+                        <button
+                          onClick={showNewPw}
+                          className="italic text-[13px]"
+                          id="newShow"
+                        >
+                          Show password
+                        </button>
+                      </div>
                     </div>
                     <div>
                       <div>

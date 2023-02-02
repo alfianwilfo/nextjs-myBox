@@ -77,5 +77,22 @@ class User {
       next(error);
     }
   }
+  static async changePassword(req, res, next) {
+    try {
+      let { oldPw, newPw } = req.body;
+      let findedUser = await user.findByPk(req.user.id);
+      let comparePW = bcrypt.compareSync(oldPw, findedUser.password);
+      if (!comparePW) {
+        throw { name: "validator", status: 400, message: "Wrong old password" };
+      }
+      let updatePassword = await user.update(
+        { password: newPw },
+        { where: { id: req.user.id }, individualHooks: true }
+      );
+      // console.log(oldPw, newPw, req.user, ">><<");
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 module.exports = User;

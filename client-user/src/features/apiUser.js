@@ -45,6 +45,17 @@ export const usersApi = createApi({
         },
       }),
     }),
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: "/",
+        method: "PATCH",
+        body,
+        headers: {
+          access_token: localStorage.access_token,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    }),
   }),
 });
 
@@ -53,4 +64,5 @@ export const {
   useLoginMutation,
   useSettingsMutation,
   useChangeMutation,
+  useChangePasswordMutation,
 } = usersApi;
