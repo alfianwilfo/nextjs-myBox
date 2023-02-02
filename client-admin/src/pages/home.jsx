@@ -19,6 +19,11 @@ export default function Home() {
           <div className="text-[50px] font-semibold text-center underline underline-offset-4 decoration-[#00ADB5]">
             Dashboard
           </div>
+          <div className="flex flex-row-reverse">
+            <button className="transition duration-700 outline outline-1 py-[5px] px-[10px] rounded hover:bg-[#00ADB5] hover:text-white">
+              Create product
+            </button>
+          </div>
           <div>
             <table className="w-full table-fixed">
               <thead className="h-[30px]">
