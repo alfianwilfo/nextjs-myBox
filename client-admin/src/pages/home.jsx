@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Navbar from "@/components/navbar";
-import { useState } from "react";
+import { useGetProductsQuery } from "@/features/apiProducts";
+import Trow from "@/components/trow";
 export default function Home() {
-  useState(() => {}, []);
+  const { data, error, isLoading } = useGetProductsQuery();
+
   return (
     <>
       <Head>
@@ -18,22 +20,22 @@ export default function Home() {
             Dashboard
           </div>
           <div>
-            <table className="w-full">
+            <table className="w-full table-fixed">
               <thead className="h-[30px]">
                 <tr className="rounded-t border-b-2 border-[#393E46] text-[18px]">
                   <th>Name</th>
                   <th>Image</th>
                   <th>Brand</th>
+                  <th>Price</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>asa</td>
-                  <td>asa</td>
-                  <td>asa</td>
-                  <td>asa</td>
-                </tr>
+                {data
+                  ? data.map((product, i) => {
+                      return <Trow product={product} key={product.id} i={i} />;
+                    })
+                  : null}
               </tbody>
             </table>
           </div>
