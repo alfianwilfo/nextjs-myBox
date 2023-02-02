@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/logonav.png";
 import logom from "@/public/log.png";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Account from "./account";
 export default function Navbar() {
