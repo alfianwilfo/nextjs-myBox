@@ -35,6 +35,18 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
+    updateProduct: builder.mutation({
+      query: (params) => ({
+        url: `products/${params.id}`,
+        method: "PUT",
+        body: params.body,
+        headers: {
+          access_token: localStorage.access_token,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["Products"],
+    }),
   }),
 });
 
@@ -43,4 +55,5 @@ export const {
   useGetProductByIdQuery,
   useCreateProductMutation,
   useDeleteProductMutation,
+  useUpdateProductMutation,
 } = productsApi;

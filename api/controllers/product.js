@@ -50,5 +50,20 @@ class Product {
       console.log(error);
     }
   }
+
+  static async update(req, res, next) {
+    try {
+      let { id } = req.params;
+      let { name, imageUrl, brand } = req.body;
+      let price = +req.body.price;
+      let updateData = await product.update(
+        { name, imageUrl, brand, price },
+        { where: { id } }
+      );
+      res.json({ message: "Success update product" });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 module.exports = Product;
