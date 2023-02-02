@@ -31,10 +31,7 @@ export default function Detail() {
           </div>
         </div>
       ) : (
-        // <div className="w-screen h-screen flex justify-center items-center">
-        //   <div className="text-[100px]">Loading ...</div>
-        // </div>
-        <div className="grid grid-cols-12 grid-rows-6">
+        <div className="h-screen grid grid-cols-12 grid-rows-6">
           <div className="col-span-12 row-span-1">
             <Navbar />
           </div>

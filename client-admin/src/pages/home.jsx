@@ -2,8 +2,14 @@ import Head from "next/head";
 import Navbar from "@/components/navbar";
 import { useGetProductsQuery } from "@/features/apiProducts";
 import Trow from "@/components/trow";
+import { useRouter } from "next/router";
 export default function Home() {
   const { data, error, isLoading } = useGetProductsQuery();
+  let router = useRouter();
+
+  let toCreate = () => {
+    router.push("/product/create");
+  };
 
   return (
     <>
@@ -16,11 +22,14 @@ export default function Home() {
       <Navbar />
       <div className="grid grid-cols-12">
         <div className="col-start-2 col-end-12 flex flex-col gap-y-[40px]">
-          <div className="text-[50px] font-semibold text-center underline underline-offset-4 decoration-[#00ADB5]">
+          <div className="text-[50px] font-semibold text-center underline underline-offset-8 decoration-[#00ADB5]">
             Dashboard
           </div>
           <div className="flex flex-row-reverse">
-            <button className="transition duration-700 outline outline-1 py-[5px] px-[10px] rounded hover:bg-[#00ADB5] hover:text-white">
+            <button
+              onClick={toCreate}
+              className="transition duration-700 outline outline-1 py-[5px] px-[10px] rounded hover:bg-[#00ADB5] hover:text-white"
+            >
               Create product
             </button>
           </div>
