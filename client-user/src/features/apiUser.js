@@ -24,7 +24,45 @@ export const usersApi = createApi({
         },
       }),
     }),
+    settings: builder.mutation({
+      query: (access_token) => ({
+        url: "/",
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          access_token,
+        },
+      }),
+    }),
+    change: builder.mutation({
+      query: (body) => ({
+        url: "/",
+        method: "PUT",
+        body,
+        headers: {
+          access_token: localStorage.access_token,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: "/",
+        method: "PATCH",
+        body,
+        headers: {
+          access_token: localStorage.access_token,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = usersApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useSettingsMutation,
+  useChangeMutation,
+  useChangePasswordMutation,
+} = usersApi;

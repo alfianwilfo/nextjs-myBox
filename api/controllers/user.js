@@ -49,5 +49,50 @@ class User {
       next(error);
     }
   }
+  static async settings(req, res, next) {
+    try {
+      let { id } = req.user;
+      let findUser = await user.findByPk(id);
+      let address;
+      if (!findUser.address) {
+        address = "";
+      }
+      if (findUser.address) {
+        address = findUser.address;
+      }
+      res.json({ name: findUser.name, address: address });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async changeDetails(req, res, next) {
+    try {
+      let { name, address } = req.body;
+      let changeDetails = await user.update(
+        { name, address },
+        { where: { id: req.user.id } }
+      );
+      res.json({ message: "Success update profile" });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async changePassword(req, res, next) {
+    try {
+      let { oldPw, newPw } = req.body;
+      let findedUser = await user.findByPk(req.user.id);
+      let comparePW = bcrypt.compareSync(oldPw, findedUser.password);
+      if (!comparePW) {
+        throw { name: "validator", status: 400, message: "Wrong old password" };
+      }
+      let updatePassword = await user.update(
+        { password: newPw },
+        { where: { id: req.user.id }, individualHooks: true }
+      );
+      res.json({ message: "Success change password" });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 module.exports = User;
