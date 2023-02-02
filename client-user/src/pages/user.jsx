@@ -129,6 +129,18 @@ export default function User() {
           theme: "dark",
         });
       }
+      if (res.data) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
     });
   };
   return (

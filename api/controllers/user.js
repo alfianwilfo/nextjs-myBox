@@ -89,7 +89,7 @@ class User {
         { password: newPw },
         { where: { id: req.user.id }, individualHooks: true }
       );
-      // console.log(oldPw, newPw, req.user, ">><<");
+      res.json({ message: "Success change password" });
     } catch (error) {
       next(error);
     }
