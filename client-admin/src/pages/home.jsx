@@ -10,6 +10,33 @@ export default function Home() {
         <link rel="icon" href="/log.png" />
       </Head>
       <Navbar />
+      <div className="w-screen grid grid-cols-12">
+        <div className="col-start-2 col-end-12">
+          <div className="text-[50px] font-semibold text-center">Dashboard</div>
+          <div>
+            <table className="w-full">
+              <thead>
+                <tr>
+                  <th className="border border-[2px] border-slate-600">No</th>
+                  <th>Name</th>
+                  <th>Image</th>
+                  <th>Brand</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>asa</td>
+                  <td>asa</td>
+                  <td>asa</td>
+                  <td>asa</td>
+                  <td>asa</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
