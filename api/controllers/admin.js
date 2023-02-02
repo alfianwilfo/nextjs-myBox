@@ -3,6 +3,18 @@ var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
 class Admin {
+  static async delete(req, res, next) {
+    try {
+      let id = +req.params.id;
+      let deleteUser = await user.destroy({ where: { id } });
+      if (!deleteUser) {
+        throw { name: "validator", status: 404, message: "User not found" };
+      }
+      res.json({ message: "Success delete user" });
+    } catch (error) {
+      next(error);
+    }
+  }
   static async login(req, res, next) {
     try {
       let { username, password } = req.body;
@@ -44,9 +56,7 @@ class Admin {
   }
   static async get(req, res, next) {
     try {
-      console.log("masuk");
       let data = await user.findAll();
-      console.log(data);
       res.json(data);
     } catch (error) {
       next(error);

@@ -1,10 +1,40 @@
+import { useDeleteUserMutation } from "@/features/apiUser";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Trowu({ user, i }) {
+  let [deleteUser] = useDeleteUserMutation();
   console.log("kepanggil");
   let toEdit = () => {
     console.log("edit");
   };
   let deletes = () => {
-    console.log("del");
+    deleteUser(user.id).then((res) => {
+      if (res.error) {
+        toast.error(res.error.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (res.data) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    });
   };
   return (
     <tr>

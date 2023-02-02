@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const usersApi = createApi({
   reducerPath: "usersApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/admin" }),
+  tagTypes: ["Users"],
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (user) => ({
@@ -23,10 +24,25 @@ export const usersApi = createApi({
         },
       }),
     }),
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `/${id}`,
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        invalidatesTags: ["Users"],
+      }),
+    }),
     getUsers: builder.query({
       query: () => "/users",
+      providesTags: ["Users"],
     }),
   }),
 });
-export const { useRegisterMutation, useLoginMutation, useGetUsersQuery } =
-  usersApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useGetUsersQuery,
+  useDeleteUserMutation,
+} = usersApi;
