@@ -1,5 +1,41 @@
 import Image from "next/image";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { useDeleteProductMutation } from "@/features/apiProducts";
+import { useGetProductsQuery } from "@/features/apiProducts";
 export default function Trow({ product, i }) {
+  let [deleteProduct] = useDeleteProductMutation();
+  let { refetch } = useGetProductsQuery();
+  let deletes = () => {
+    deleteProduct(product.id).then((res) => {
+      if (res.error) {
+        toast.error(res.error.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (res.data) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        refetch();
+      }
+    });
+  };
   return (
     <tr>
       <td>
@@ -18,7 +54,10 @@ export default function Trow({ product, i }) {
             </button>
           </div>
           <div>
-            <button className="transition duration-700 outline outline-1 py-[5px] w-[100px] rounded hover:bg-[#393E46] hover:text-white">
+            <button
+              onClick={deletes}
+              className="transition duration-700 outline outline-1 py-[5px] w-[100px] rounded hover:bg-[#393E46] hover:text-white"
+            >
               Delete
             </button>
           </div>

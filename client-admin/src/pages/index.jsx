@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useLoginMutation } from "@/features/apiUser";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
@@ -62,7 +62,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/log.png" />
       </Head>
-      <ToastContainer />
       <div className="h-screen w-screen grid grid-cols-12 grid-rows-6">
         <div className="col-start-5 col-end-9 row-start-2 row-end-6 outline outline-1 outline-[#00ADB5] grid content-center grid-cols-12">
           <div className="col-start-2 col-end-12 flex flex-col gap-y-[25px]">

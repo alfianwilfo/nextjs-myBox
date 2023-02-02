@@ -37,5 +37,18 @@ class Product {
       next(error);
     }
   }
+
+  static async delete(req, res, next) {
+    try {
+      let id = +req.params.id;
+      let findProduct = await product.destroy({ where: { id } });
+      if (!findProduct) {
+        res.status(404).json({ message: "Product not found" });
+      }
+      res.json({ message: "Success delete product" });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 module.exports = Product;
