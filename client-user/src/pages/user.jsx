@@ -4,9 +4,14 @@ import { useRouter } from "next/router";
 import { useSettingsMutation } from "@/features/apiUser";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { useChangeMutation } from "@/features/apiUser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function User() {
   let [settings] = useSettingsMutation();
   let [data, setData] = useState({ name: "", address: "" });
+  let [change] = useChangeMutation();
   let router = useRouter();
   let toHome = (e) => {
     e.preventDefault();
@@ -20,7 +25,57 @@ export default function User() {
       }
     });
   }, []);
+  let submitChangeDetails = (e) => {
+    e.preventDefault();
+    if (!data.name) {
+      toast.warn("Please add your name", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    if (!data.address) {
+      toast.warn("Please add your address", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    if (data.name && data.address) {
+      change(data).then((res) => {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
+    }
+  };
 
+  const handleChangeDetails = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
   return (
     <>
       <Head>
@@ -29,6 +84,7 @@ export default function User() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/log.png" />
       </Head>
+      <ToastContainer />
       <div className="h-screen w-screen grid grid-cols-12 grid-rows-6">
         <div className="outline outline-1 col-start-3 col-end-11 row-start-2 row-end-6 grid grid-cols-12 gap-[10px]">
           <div className="col-start-2 col-end-12 flex flex-row py-[10px]">
@@ -41,26 +97,32 @@ export default function User() {
               <div className="flex flex-col gap-y-[10px] ">
                 <div className="font-bold">Edit detail user</div>
                 <div>
-                  <form className=" flex flex-col gap-y-[10px]">
+                  <form
+                    onSubmit={submitChangeDetails}
+                    className=" flex flex-col gap-y-[10px]"
+                  >
                     <div>
                       <input
+                        onChange={handleChangeDetails}
                         className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
                         type="text"
                         placeholder="Your name"
                         value={data?.name}
+                        name="name"
                       />
                     </div>
                     <div>
                       <textarea
+                        onChange={handleChangeDetails}
                         className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
                         name=""
                         id=""
                         cols="10"
                         rows="3"
                         placeholder="Your address"
-                      >
-                        {data.address}
-                      </textarea>
+                        name="address"
+                        value={data?.address}
+                      />
                     </div>
                     <div className="grid grid-cols-12">
                       <div className="col-start-1 col-end-9">

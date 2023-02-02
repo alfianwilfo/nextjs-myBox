@@ -3,7 +3,6 @@ var jwt = require("jsonwebtoken");
 let authetication = async (req, res, next) => {
   try {
     let { access_token } = req.headers;
-    console.log("masuk sini");
     if (!access_token) {
       throw { name: "validator", status: 401, message: "Please login first" };
     }

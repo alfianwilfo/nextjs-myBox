@@ -34,8 +34,23 @@ export const usersApi = createApi({
         },
       }),
     }),
+    change: builder.mutation({
+      query: (body) => ({
+        url: "/",
+        method: "PUT",
+        body,
+        headers: {
+          access_token: localStorage.access_token,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useSettingsMutation } =
-  usersApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useSettingsMutation,
+  useChangeMutation,
+} = usersApi;

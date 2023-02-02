@@ -53,7 +53,6 @@ class User {
     try {
       let { id } = req.user;
       let findUser = await user.findByPk(id);
-      console.log(findUser);
       let address;
       if (!findUser.address) {
         address = "";
@@ -62,6 +61,18 @@ class User {
         address = findUser.address;
       }
       res.json({ name: findUser.name, address: address });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async changeDetails(req, res, next) {
+    try {
+      let { name, address } = req.body;
+      let changeDetails = await user.update(
+        { name, address },
+        { where: { id: req.user.id } }
+      );
+      res.json({ message: "Success update profile" });
     } catch (error) {
       next(error);
     }
