@@ -1,4 +1,4 @@
-let { admin } = require("../models/");
+let { admin, user } = require("../models/");
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
@@ -38,6 +38,16 @@ class Admin {
       }
       var token = jwt.sign({ id: findedUser.id }, "shhhhh");
       res.json({ access_token: token });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async get(req, res, next) {
+    try {
+      console.log("masuk");
+      let data = await user.findAll();
+      console.log(data);
+      res.json(data);
     } catch (error) {
       next(error);
     }

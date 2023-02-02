@@ -3,7 +3,6 @@ import Navbar from "@/components/navbar";
 import { useGetProductsQuery } from "@/features/apiProducts";
 import Trow from "@/components/trow";
 import { useRouter } from "next/router";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 
