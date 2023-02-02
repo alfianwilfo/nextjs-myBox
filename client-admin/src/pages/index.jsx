@@ -1,11 +1,52 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useState } from "react";
+import { useLoginMutation } from "@/features/apiUser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
+  let [input, setInput] = useState({ username: "", password: "" });
+  let [login] = useLoginMutation();
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    setInput({
+      ...input,
+      [name]: value,
+    });
+  };
+  const submitLogin = (e) => {
+    e.preventDefault();
+    login(input).then((res) => {
+      console.log(res);
+      if (res.error) {
+        toast.warn(res.error.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (res.data) {
+        toast.success("Welcome", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    });
+  };
   return (
     <>
       <Head>
@@ -14,7 +55,49 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/log.png" />
       </Head>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <ToastContainer />
+      <div className="h-screen w-screen grid grid-cols-12 grid-rows-6">
+        <div className="col-start-5 col-end-9 row-start-2 row-end-6 outline outline-1 outline-[#00ADB5] grid content-center grid-cols-12">
+          <div className="col-start-2 col-end-12 flex flex-col gap-y-[25px]">
+            <div className="text-center text-[40px] text-[#222831] font-semibold">
+              Next Store
+            </div>
+            <div>
+              <form
+                onSubmit={submitLogin}
+                className="flex flex-col gap-y-[20px]"
+              >
+                <div className="flex flex-col gap-y-[10px]">
+                  <div>
+                    <input
+                      className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                      placeholder="Username"
+                      type="text"
+                      name="username"
+                      value={input.username}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                      placeholder="Password"
+                      type="password"
+                      onChange={handleChange}
+                      name="password"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button className="outline outline-1 outline-[#393E46]/10 bg-[#222831] text-white p-[10px] w-full rounded-[1px]">
+                    Login
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
