@@ -31,8 +31,8 @@ export const usersApi = createApi({
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-        invalidatesTags: ["Users"],
       }),
+      invalidatesTags: ["Users"],
     }),
     getUsers: builder.query({
       query: () => "/users",
