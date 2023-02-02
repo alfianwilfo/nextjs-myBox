@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function User() {
   let [settings] = useSettingsMutation();
   let [data, setData] = useState({ name: "", address: "" });
+  let [pw, setPw] = useState({ newPw: "", oldPw: "" });
   let [change] = useChangeMutation();
   let router = useRouter();
   let toHome = (e) => {
@@ -19,7 +20,6 @@ export default function User() {
   };
   useEffect(() => {
     settings(localStorage.access_token).then((res) => {
-      console.log(res, "ini res");
       if (res.data) {
         setData({ name: res.data.name, address: res.data.address });
       }
@@ -76,6 +76,29 @@ export default function User() {
       [name]: value,
     });
   };
+  const handleChangePassword = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    setPw({
+      ...pw,
+      [name]: value,
+    });
+  };
+  let showOldPw = (e) => {
+    e.preventDefault();
+    let temp = document.getElementById("oldPw");
+    let but = document.getElementById("oldShow");
+    if (temp.type === "password") {
+      temp.type = "text";
+      but.innerText = "Hide password";
+    } else {
+      temp.type = "password";
+      but.innerText = "Show password";
+    }
+  };
+
+  const changePassword = () => {};
   return (
     <>
       <Head>
@@ -93,7 +116,7 @@ export default function User() {
                 <Image src={logo} className="w-[300px]" />
               </div>
             </div>
-            <div className="w-1/2 flex flex-col gap-y-[10px] divide-y-[2px] divide-[#222831]">
+            <div className="w-1/2 flex flex-col justify-evenly">
               <div className="flex flex-col gap-y-[10px] ">
                 <div className="font-bold">Edit detail user</div>
                 <div>
@@ -142,7 +165,8 @@ export default function User() {
                   </form>
                 </div>
               </div>
-              <div>
+              <div className="h-[1px] bg-[#222831]"></div>
+              <div className="flex flex-col gap-y-[20px]">
                 <div className="font-bold">Change password</div>
                 <div>
                   <form className="flex flex-col gap-y-[10px]">
@@ -151,21 +175,32 @@ export default function User() {
                         className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
                         type="text"
                         placeholder="New password"
+                        onChange={handleChangePassword}
+                        value={pw.newPw}
+                        name="newPw"
                       />
                     </div>
                     <div>
-                      <input
-                        className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
-                        type="text"
-                        placeholder="Repeat new password"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
-                        type="text"
-                        placeholder="Old password"
-                      />
+                      <div>
+                        <input
+                          className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px]"
+                          type="password"
+                          placeholder="Old password"
+                          value={pw.oldPw}
+                          name="oldPw"
+                          id="oldPw"
+                          onChange={handleChangePassword}
+                        />
+                      </div>
+                      <div>
+                        <button
+                          onClick={showOldPw}
+                          className="italic text-[13px]"
+                          id="oldShow"
+                        >
+                          Show password
+                        </button>
+                      </div>
                     </div>
                     <div className="grid grid-cols-12">
                       <div className="col-start-1 col-end-9">
