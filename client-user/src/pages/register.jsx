@@ -33,7 +33,6 @@ export default function Register() {
       [name]: value,
     });
   };
-  const notify = () => toast("Wow so easy!");
 
   useEffect(() => {
     localStorage.access_token ? router.push("/") : null;

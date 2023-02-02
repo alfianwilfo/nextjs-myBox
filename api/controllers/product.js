@@ -20,5 +20,14 @@ class Product {
       next(error);
     }
   }
+
+  static async create(req, res, next) {
+    try {
+      let { name, price, imageUrl, brand } = req.body;
+      console.log(name, price, imageUrl, brand);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 module.exports = Product;

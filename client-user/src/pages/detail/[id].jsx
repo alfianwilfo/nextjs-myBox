@@ -41,14 +41,20 @@ export default function Detail() {
             </div>
             <div className="col-start-7 col-end-12 p-[30px] flex flex-col gap-y-[50px]">
               <div>
-                <div className="px-[100px] text-center flex justify-center">
-                  <div className="transition-colors duration-700 ease-in-out text-black font-bold w-[100px] rounded-[2px] hover:text-white hover:bg-[#00ADB5] outline outline-1 outline-[#00ADB5]">
-                    <div className="p-[1px]">{data.brand}</div>
-                  </div>
+                <div className="text-center flex flex-row-reverse">
+                  {data.info === "Stok Habis" ? (
+                    <div className="transition-colors duration-700 ease-in-out text-[#222831] font-bold w-[100px] rounded-[20px] bg-[#EEEEEE]">
+                      <div className="p-[1px]">{data.info}</div>
+                    </div>
+                  ) : (
+                    <div className="transition-colors duration-700 ease-in-out text-white font-bold px-[10px] py-[5px] rounded-[20px] bg-[#00ADB5]">
+                      <div className="p-[1px]">{data.info}</div>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <div className="text-[25px] font-semibold text-right">
-                    {data.name}
+                    {data.name} - {data.brand}
                   </div>
                   <div className="text-[23px] font-semibold flex flex-row justify-end text-right">
                     <div>Harga:</div>
