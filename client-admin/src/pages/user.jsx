@@ -29,7 +29,7 @@ export default function User(params) {
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="gap-[5px]">
                 {data
                   ? data.map((user, i) => {
                       return <Trowu user={user} key={user.id} i={i} />;
