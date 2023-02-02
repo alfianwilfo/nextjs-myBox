@@ -8,7 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { data, error, isLoading } = useGetProductsQuery();
+  const { data, error, isLoading } = useGetProductsQuery(
+    {},
+    { refetchOnMountOrArgChange: true }
+  );
   let router = useRouter();
 
   useEffect(() => {

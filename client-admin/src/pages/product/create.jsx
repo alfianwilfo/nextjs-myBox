@@ -36,6 +36,7 @@ export default function Create() {
           progress: undefined,
           theme: "colored",
         });
+        router.push("/home");
       }
       if (res.error) {
         toast.warn(res.error.data.message, {
