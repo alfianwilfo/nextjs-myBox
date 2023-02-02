@@ -10,7 +10,22 @@ export const productsApi = createApi({
     getProductById: builder.query({
       query: (id) => `products/${id}`,
     }),
+    addCart: builder.mutation({
+      query: (body) => ({
+        url: "cartS",
+        method: "POST",
+        body,
+        headers: {
+          access_token: localStorage.access_token,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductByIdQuery } = productsApi;
+export const {
+  useGetProductsQuery,
+  useGetProductByIdQuery,
+  useAddCartMutation,
+} = productsApi;

@@ -19,7 +19,6 @@ class Cart {
           by: 1,
           where: { id: checkCart.id },
         });
-        console.log(increment);
         res.json({ message: "Success add to cart" });
       }
     } catch (error) {
