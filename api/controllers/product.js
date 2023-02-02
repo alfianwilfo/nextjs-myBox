@@ -20,5 +20,35 @@ class Product {
       next(error);
     }
   }
+
+  static async create(req, res, next) {
+    try {
+      let { name, imageUrl, brand } = req.body;
+      let price = +req.body.price;
+      let createdProduct = await product.create({
+        name,
+        imageUrl,
+        brand,
+        price,
+      });
+      console.log(createdProduct);
+      res.status(201).json({ message: "Success create product" });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async delete(req, res, next) {
+    try {
+      let id = +req.params.id;
+      let findProduct = await product.destroy({ where: { id } });
+      if (!findProduct) {
+        res.status(404).json({ message: "Product not found" });
+      }
+      res.json({ message: "Success delete product" });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 module.exports = Product;
