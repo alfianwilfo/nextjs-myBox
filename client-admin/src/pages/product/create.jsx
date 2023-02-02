@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useCreateProductMutation } from "@/features/apiProducts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useRouter } from "next/router";
 export default function Create() {
+  let router = useRouter();
   const [createProduct] = useCreateProductMutation();
   const [input, setInput] = useState({
     name: "",
@@ -49,6 +50,9 @@ export default function Create() {
         });
       }
     });
+  };
+  const cancel = () => {
+    router.push("/home");
   };
   return (
     <>
@@ -97,8 +101,17 @@ export default function Create() {
                   onChange={handleChange}
                   value={input.imageUrl}
                 />
-                <button className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px] bg-[#00ADB5]">
+                <button
+                  type="submit"
+                  className="outline outline-1 outline-[#393E46]/10 focus:outline-[#393E46] p-[10px] w-full rounded-[1px] bg-[#00ADB5]"
+                >
                   Submit
+                </button>
+                <button
+                  onClick={cancel}
+                  className="bg-[#EEEEEE] rounded-[1px] p-[10px]"
+                >
+                  Cancel
                 </button>
               </form>
             </div>
