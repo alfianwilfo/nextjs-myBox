@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useLoginMutation } from "@/features/apiUser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 export default function Home() {
   let [input, setInput] = useState({ username: "", password: "" });
   let [login] = useLoginMutation();
+  let router = useRouter();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -44,6 +46,7 @@ export default function Home() {
           progress: undefined,
           theme: "dark",
         });
+        router.push("/home");
       }
     });
   };
