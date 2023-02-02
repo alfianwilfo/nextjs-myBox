@@ -3,8 +3,14 @@ import Navbar from "@/components/navbar";
 import { useGetUsersQuery } from "@/features/apiUser";
 import Trowu from "@/components/trowu";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 export default function User(params) {
+  let router = useRouter();
   let { data } = useGetUsersQuery({}, { refetchOnMountOrArgChange: true });
+  useEffect(() => {
+    !localStorage.access_token ? router.push("/") : null;
+  });
   return (
     <>
       <Head>

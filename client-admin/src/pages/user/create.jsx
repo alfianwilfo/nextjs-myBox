@@ -1,14 +1,17 @@
 import Head from "next/head";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCreateUserMutation } from "@/features/apiUser";
 import { useRouter } from "next/router";
-import Link from "next/link";
 export default function Create() {
   let [createUser] = useCreateUserMutation();
   let router = useRouter();
   let [input, setInput] = useState({ name: "", email: "", password: "" });
+
+  useEffect(() => {
+    !localStorage.access_token ? router.push("/") : null;
+  });
 
   let cancels = () => {
     router.push("/user");

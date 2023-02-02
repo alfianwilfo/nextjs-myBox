@@ -17,6 +17,9 @@ export default function Edit() {
     imageUrl: "",
   });
   useEffect(() => {
+    !localStorage.access_token ? router.push("/") : null;
+  });
+  useEffect(() => {
     if (data) {
       setInput(data);
     }
