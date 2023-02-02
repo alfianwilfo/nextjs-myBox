@@ -6,7 +6,6 @@ import { useDeleteProductMutation } from "@/features/apiProducts";
 import { useGetProductsQuery } from "@/features/apiProducts";
 export default function Trow({ product, i }) {
   let [deleteProduct] = useDeleteProductMutation();
-  let { refetch } = useGetProductsQuery();
   let deletes = () => {
     deleteProduct(product.id).then((res) => {
       if (res.error) {
@@ -32,9 +31,14 @@ export default function Trow({ product, i }) {
           progress: undefined,
           theme: "dark",
         });
-        refetch();
       }
     });
+  };
+  const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
   };
   return (
     <tr>
@@ -45,7 +49,7 @@ export default function Trow({ product, i }) {
         <Image src={product.imageUrl} width={100} height={100} />
       </td>
       <td className="text-center">{product.brand}</td>
-      <td className="text-center">{product.price}</td>
+      <td className="text-center">{rupiah(product.price)}</td>
       <td className="m-auto">
         <div className="flex justify-between ">
           <div>
