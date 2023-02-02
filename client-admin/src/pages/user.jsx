@@ -2,6 +2,7 @@ import Head from "next/head";
 import Navbar from "@/components/navbar";
 import { useGetUsersQuery } from "@/features/apiUser";
 import Trowu from "@/components/trowu";
+import Link from "next/link";
 export default function User(params) {
   let { data } = useGetUsersQuery({}, { refetchOnMountOrArgChange: true });
   return (
@@ -14,11 +15,15 @@ export default function User(params) {
       </Head>
       <Navbar />
       <div className="grid grid-cols-12">
-        <div className="col-start-2 col-end-12 flex flex-col gap-y-[40px]">
+        <div className="col-start-2 col-end-12 flex flex-col gap-y-[10px]">
           <div className="text-[50px] font-semibold text-center underline underline-offset-8 decoration-[#00ADB5]">
             List of users
           </div>
-
+          <div className="flex flex-row-reverse">
+            <button className="bg-[#00ADB5] text-white py-[5px] px-[10px] rounded">
+              <Link href="/user/create">Create user</Link>
+            </button>
+          </div>
           <div>
             <table className="w-full table-fixed">
               <thead className="h-[30px]">
