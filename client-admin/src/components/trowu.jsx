@@ -3,10 +3,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import { useState } from "react";
-
+import { useUpdatePasswordMutation } from "@/features/apiUser";
+import { useRouter } from "next/router";
 export default function Trowu({ user, i }) {
+  let router = useRouter();
   let [deleteUser] = useDeleteUserMutation();
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [updatePassword] = useUpdatePasswordMutation();
   const [input, setInput] = useState({ password: "" });
 
   const handleChange = (e) => {
@@ -21,7 +24,33 @@ export default function Trowu({ user, i }) {
 
   let submitEdit = (e) => {
     e.preventDefault();
-    console.log(input);
+    updatePassword({ input, id: user.id }).then((res) => {
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      if (res.data) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    });
   };
   let deletes = () => {
     deleteUser(user.id).then((res) => {

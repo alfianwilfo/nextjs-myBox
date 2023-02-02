@@ -38,6 +38,17 @@ export const usersApi = createApi({
       query: () => "/users",
       providesTags: ["Users"],
     }),
+    updatePassword: builder.mutation({
+      query: (data) => ({
+        url: `/password/${data.id}`,
+        method: "PATCH",
+        body: data.input,
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 export const {
@@ -45,4 +56,5 @@ export const {
   useLoginMutation,
   useGetUsersQuery,
   useDeleteUserMutation,
+  useUpdatePasswordMutation,
 } = usersApi;
