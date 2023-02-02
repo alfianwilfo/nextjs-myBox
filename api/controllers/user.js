@@ -49,5 +49,22 @@ class User {
       next(error);
     }
   }
+  static async settings(req, res, next) {
+    try {
+      let { id } = req.user;
+      let findUser = await user.findByPk(id);
+      console.log(findUser);
+      let address;
+      if (!findUser.address) {
+        address = "";
+      }
+      if (findUser.address) {
+        address = findUser.address;
+      }
+      res.json({ name: findUser.name, address: address });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 module.exports = User;
