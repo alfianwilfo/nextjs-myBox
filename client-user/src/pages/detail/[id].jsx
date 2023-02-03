@@ -76,7 +76,7 @@ export default function Detail() {
             <Navbar />
           </div>
           <div className="col-start-2 col-end-12 outline outline-1 row-start-2 row-end-6 grid grid-cols-12">
-            <div className="bg-containt col-start-2 col-end-7">
+            <div className="bg-containt col-start-2 col-end-7 bg-auto">
               <Image src={data.imageUrl} width={500} height={500} />
             </div>
             <div className="col-start-7 col-end-12 p-[30px] flex flex-col gap-y-[50px]">

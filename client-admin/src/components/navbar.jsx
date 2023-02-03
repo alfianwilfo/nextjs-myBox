@@ -2,6 +2,9 @@ import logos from "@/public/logos.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Navbar() {
   let router = useRouter();
   let toLogout = () => {

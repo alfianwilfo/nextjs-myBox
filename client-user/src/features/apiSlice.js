@@ -21,6 +21,17 @@ export const productsApi = createApi({
         },
       }),
     }),
+    myCart: builder.mutation({
+      query: (body) => ({
+        url: "cartS",
+        method: "POST",
+        body,
+        headers: {
+          access_token: localStorage.access_token,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+    }),
   }),
 });
 
@@ -28,4 +39,5 @@ export const {
   useGetProductsQuery,
   useGetProductByIdQuery,
   useAddCartMutation,
+  useMyCartQuery,
 } = productsApi;

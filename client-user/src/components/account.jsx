@@ -6,6 +6,8 @@ import logoutw from "@/public/logoutw.svg";
 import profv from "@/public/profv.svg";
 import profw from "@/public/profw.svg";
 import { useRouter } from "next/router";
+import cwhite from "@/public/cwhite.svg";
+import cgre from "@/public/cgre.svg";
 
 export default function Account() {
   let router = useRouter();
@@ -15,6 +17,9 @@ export default function Account() {
   };
   let toUser = () => {
     router.push("/user");
+  };
+  let toCart = () => {
+    router.push("/cart");
   };
 
   return (
@@ -36,6 +41,23 @@ export default function Account() {
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={toCart}
+                    className={`${
+                      active ? "bg-[#00ADB5] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  >
+                    {active ? (
+                      <Image src={cwhite} width={16} className="mr-[10px]" />
+                    ) : (
+                      <Image src={cgre} width={16} className="mr-[10px]" />
+                    )}
+                    Cart
+                  </button>
+                )}
+              </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <button
