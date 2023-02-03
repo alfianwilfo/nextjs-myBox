@@ -151,7 +151,10 @@ export default function Register() {
                     <div className="text-[14px]">
                       Sudah punya account?
                       <Link href="/login">
-                        <button className="ml-[1px] transition-colors duration-[700ms] hover:text-[#00ADB5]">
+                        <button
+                          type="submit"
+                          className="ml-[1px] transition-colors duration-[700ms] hover:text-[#00ADB5]"
+                        >
                           Login disini
                         </button>
                       </Link>

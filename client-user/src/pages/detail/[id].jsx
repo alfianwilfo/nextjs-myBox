@@ -4,8 +4,14 @@ import Navbar from "@/components/navbar";
 import { useGetProductByIdQuery } from "@/features/apiSlice";
 import Loading from "@/components/loading";
 import Head from "next/head";
+import { useAddCartMutation } from "@/features/apiSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Router from "next/router";
+
 export default function Detail() {
   let router = useRouter();
+  let [addCart] = useAddCartMutation();
   const { data, isLoading } = useGetProductByIdQuery(router.query.id);
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -13,7 +19,41 @@ export default function Detail() {
       currency: "IDR",
     }).format(number);
   };
-  const App = () => <Lottie animationData={groovyWalkAnimation} loop={true} />;
+  let checkout = () => {
+    Router.push({
+      pathname: "/buy-out",
+      query: data,
+    });
+  };
+  let addToCart = () => {
+    addCart({ id: router.query.id }).then((res) => {
+      console.log(res);
+      if (res.data) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+      if (res.error) {
+        toast.error(res.error.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    });
+  };
   return (
     <>
       <Head>
@@ -56,24 +96,32 @@ export default function Detail() {
                   <div className="text-[25px] font-semibold text-right">
                     {data.name} - {data.brand}
                   </div>
-                  <div className="text-[23px] font-semibold flex flex-row justify-end text-right">
-                    <div>Harga:</div>
+                  <div className="text-[23px] font-semibold flex flex-row gap-x-[4px] justify-end text-right">
+                    <div>Price: </div>
                     <div className="text-[#00ADB5]">{rupiah(data.price)}</div>
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between">
-                <div>
-                  <button className="transition-colors duration-700 ease-in-out outline outline-1 outline-[#222831] hover:bg-[#222831] hover:text-white rounded w-[190px]">
-                    <div className="py-[5px]">Masukkan keranjang</div>
-                  </button>
+              {data.info === "Stok Habis" ? null : (
+                <div className="flex justify-between">
+                  <div>
+                    <button
+                      onClick={addToCart}
+                      className="transition-colors duration-700 ease-in-out outline outline-1 outline-[#222831] hover:bg-[#222831] hover:text-white rounded w-[190px]"
+                    >
+                      <div className="py-[5px]">Add to cart</div>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      onClick={checkout}
+                      className="transition-colors duration-700 ease-in-out text-white rounded bg-[#00ADB5] hover:bg-[#029ca3] w-[190px]"
+                    >
+                      <div className="py-[5px]">Buy now</div>
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <button className="transition-colors duration-700 ease-in-out text-white rounded bg-[#00ADB5] hover:bg-[#029ca3] w-[190px]">
-                    <div className="py-[5px]">Beli sekarang</div>
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

@@ -2,7 +2,9 @@ let { product } = require("../models/");
 class Product {
   static async getAll(req, res, next) {
     try {
-      let data = await product.findAll();
+      let data = await product.findAll({
+        order: [["id", "DESC"]],
+      });
       res.json(data);
     } catch (error) {
       next(error);
@@ -41,11 +43,28 @@ class Product {
   static async delete(req, res, next) {
     try {
       let id = +req.params.id;
-      let findProduct = await product.destroy({ where: { id } });
+      let findProduct = await product.destroy({
+        where: { id },
+      });
       if (!findProduct) {
         res.status(404).json({ message: "Product not found" });
       }
       res.json({ message: "Success delete product" });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async update(req, res, next) {
+    try {
+      let { id } = req.params;
+      let { name, imageUrl, brand } = req.body;
+      let price = +req.body.price;
+      let updateData = await product.update(
+        { name, imageUrl, brand, price },
+        { where: { id } }
+      );
+      res.json({ message: "Success update product" });
     } catch (error) {
       console.log(error);
     }
