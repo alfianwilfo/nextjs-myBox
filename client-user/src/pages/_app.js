@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
     <>
       <ToastContainer />
       <Provider store={store}>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </Provider>
     </>
   );
