@@ -19,7 +19,7 @@ npm install
 
 Then change database password with your own username and password on `api/config/config.json` (development environment)
 
-**Now run api** :
+**Setup database** :
 
 ```md
 npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all
