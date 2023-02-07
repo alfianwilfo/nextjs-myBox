@@ -5,7 +5,7 @@ export const productsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/" }),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => "products",
+      query: (offset) => `products/?page=${offset}`,
     }),
     getProductById: builder.query({
       query: (id) => `products/${id}`,
@@ -40,4 +40,5 @@ export const {
   useGetProductByIdQuery,
   useAddCartMutation,
   useMyCartQuery,
+  useFilterMutation,
 } = productsApi;

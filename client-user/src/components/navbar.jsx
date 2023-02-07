@@ -9,12 +9,25 @@ export default function Navbar() {
   const router = useRouter();
   const [isHov, setIsHov] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [input, setInput] = useState("");
   let goHome = () => {
     router.push("/");
   };
   useEffect(() => {
     localStorage.access_token ? setIsLogin(true) : null;
   }, []);
+
+  let handleChange = (e) => {
+    setInput(e.target.value);
+    console.log(input);
+  };
+
+  let search = () => {
+    filter(input).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <>
       <div className=" flex flex-row text-[#EEEEEE] bg-[#222831] h-[100px]">
