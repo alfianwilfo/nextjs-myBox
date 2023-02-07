@@ -8,11 +8,19 @@ export default function Pagination({ count }) {
   }, []);
   return (
     <>
-      {total
-        ? total.map((el) => {
-            return <>{el} as</>;
-          })
-        : null}
+      <div className="flex flex-row gap-x-[10px] text-white">
+        {total
+          ? total.map((el) => {
+              return (
+                <>
+                  <button className="bg-[#00ADB5] rounded px-[10px]">
+                    {el}
+                  </button>
+                </>
+              );
+            })
+          : null}
+      </div>
     </>
   );
 }

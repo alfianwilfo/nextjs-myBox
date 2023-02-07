@@ -22,15 +22,19 @@ export default function Home() {
           Our Products
         </h1>
         <div className="grid grid-cols-12">
-          <div className="col-start-2 col-end-12">
-            <div className=" grid grid-cols-12 gap-[10px]">
-              {data
-                ? data?.products.map((product, i) => {
-                    return <Card product={product} key={product.id} i={i} />;
-                  })
-                : null}
+          <div className="flex flex-col gap-y-[10px] col-start-2 col-end-12">
+            <div className="">
+              <div className=" grid grid-cols-12 gap-[10px]">
+                {data
+                  ? data?.products.map((product, i) => {
+                      return <Card product={product} key={product.id} i={i} />;
+                    })
+                  : null}
+              </div>
             </div>
-            {data ? <Pagination count={data.totalPages} /> : null}
+            <div className="flex justify-center">
+              {data ? <Pagination count={data.totalPages} /> : null}
+            </div>
           </div>
         </div>
       </main>
