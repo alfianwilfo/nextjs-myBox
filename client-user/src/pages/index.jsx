@@ -3,11 +3,11 @@ import Head from "next/head";
 import Navbar from "@/components/navbar";
 import Card from "@/components/card";
 import { useState } from "react";
+import Pagination from "@/components/pagination";
 
 export default function Home() {
   const [offset, setOffset] = useState(0);
   const { data, error, isLoading } = useGetProductsQuery(offset);
-
   return (
     <>
       <Head>
@@ -25,11 +25,12 @@ export default function Home() {
           <div className="col-start-2 col-end-12">
             <div className=" grid grid-cols-12 gap-[10px]">
               {data
-                ? data.map((product, i) => {
+                ? data?.products.map((product, i) => {
                     return <Card product={product} key={product.id} i={i} />;
                   })
                 : null}
             </div>
+            {data ? <Pagination count={data.totalPages} /> : null}
           </div>
         </div>
       </main>

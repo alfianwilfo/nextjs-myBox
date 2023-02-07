@@ -1,5 +1,6 @@
 let { product } = require("../models/");
 let getPagination = require("../helpers/getPagination");
+let getPagingData = require("../helpers/getPagingData");
 class Product {
   static async getAll(req, res, next) {
     try {
@@ -7,13 +8,14 @@ class Product {
       let size = 8;
       let { limit, offset } = getPagination(page, size);
 
-      let data = await product.findAll({
+      let data = await product.findAndCountAll({
         order: [["id", "DESC"]],
         limit,
         offset,
       });
-      console.log(data);
-      res.json(data);
+      let response = getPagingData(data, page, limit);
+      console.log(response);
+      res.json(response);
     } catch (error) {
       console.log(error);
       next(error);
