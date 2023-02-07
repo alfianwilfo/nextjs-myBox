@@ -2,9 +2,11 @@ import { useGetProductsQuery } from "@/features/apiSlice";
 import Head from "next/head";
 import Navbar from "@/components/navbar";
 import Card from "@/components/card";
+import { useState } from "react";
 
 export default function Home() {
-  const { data, error, isLoading } = useGetProductsQuery();
+  const [offset, setOffset] = useState(0);
+  const { data, error, isLoading } = useGetProductsQuery(offset);
 
   return (
     <>
